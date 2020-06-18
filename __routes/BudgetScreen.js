@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, FlatList, Alert, StyleSheet, Button } from 'react-native';
+import { View, Text, TextInput, FlatList, Alert, StyleSheet, Button, TouchableOpacity } from 'react-native';
+
+// import libaries
+import { useNavigation } from '@react-navigation/native';
 
 // import modules
 import ListItem from '../__components/ListItem';
 import AddItem from '../__components/AddItem';
 
-const BudgetScreen = () => {
+const BudgetScreen = ({ navigation }) => {
+
     // STATES:
     // items
-    const[items, setItems] = useState([{
+    const [items, setItems] = useState([{
         id: Math.random(),
         text: '',
         price: 0.00,
@@ -16,7 +20,7 @@ const BudgetScreen = () => {
     }]);
 
     // total budget
-    const[budget, setBudget] = useState(0);
+    const [budget, setBudget] = useState(0);
 
     /**
      * Removes item of specified ID via filtering all items
@@ -34,12 +38,12 @@ const BudgetScreen = () => {
      * @param { String } text
      * @param { Number } price
      */
-    const addItem = (text, price) => {
+    const addItem = (text, price, category) => {
         if (!text || !price) {
             Alert.alert('Error', 'Please enter an item.', { text: 'Ok' });
         } else {
             setItems(prevItems => {
-                return [{ id: Math.random(), text, price}, ...prevItems];
+                return [{ id: Math.random(), text, price, category}, ...prevItems];
             });
         }
     };
@@ -60,14 +64,21 @@ const BudgetScreen = () => {
         <View style={styles.container}>
             <TextInput 
                 style={styles.budget}
-                defaultValue={String(budget - getSumPrice(items))}
+                defaultValue={String((budget - getSumPrice(items)).toFixed(2))}
                 onChangeText={(budget) => setBudget(budget)}
                 keyboardType={'numeric'}
             />
             <Text style={styles.text}>Total Budget Remaining</Text>
-            <AddItem addItem={ addItem } />
+            <View>
+                <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('AddItem', { addItem: addItem })} >
+                    <Text style={styles.btnText}>
+                        Add Item
+                    </Text>
+                </TouchableOpacity>
+            </View>
 
             <FlatList 
+                style={styles.list}
                 data = { items }
                 renderItem = { ({ item }) => (
                     <ListItem 
@@ -95,7 +106,29 @@ const styles = StyleSheet.create({
     
     text: {
         textAlign: 'center',
-    }
+    },
+
+    btn: {
+        backgroundColor: '#76D7C4',
+        padding: 9,
+        margin: 20,
+        marginBottom: 10,
+        borderRadius: 5,
+    },
+
+    btnText: {
+        color: '#fff',
+        fontSize: 20,
+        textAlign: 'center',
+    },
+
+    listContainer: {
+
+    },
+
+    list: {
+        paddingTop: 15,
+    },
 });
 
 export default BudgetScreen;

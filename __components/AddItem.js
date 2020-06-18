@@ -1,64 +1,100 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { onChange } from 'react-native-reanimated';
 
-// component for dealing with adding items
-// add item button
-const AddItem = ({ item, addItem }) => {
-    // state variables
+const AddItem = ({ route, navigation }) => {
+    /* Get props */
+    const { addItem } = route.params;
+
+    /* States */ 
     const [text, setText] = useState('');
     const [price, setPrice] = useState(0);
+    const [category, setCategory] = useState('');
 
-    // onChange handler for adding items
-    // textValue is text in the input field, setText is passed to App.js
     const onChangeText = (textValue) => {
         setText(textValue);
     };
-    
+
     const onChangePrice = (priceValue) => {
         setPrice(priceValue);
     };
 
+    const onChangeCategory = (categoryValue) => {
+        setCategory(categoryValue);
+    }
 
+    const combinedOnPress = () => {
+        addItem(text, price);
+        navigation.goBack();
+    }
 
-    // later add choices:
-    // 1. add new
-    // 2. add from history (sorted by most spent categories)
-    // newItem = name, category, price
     return (
-        <View>
+        <View style={styles.wrapper}>
+            <Text style={styles.itemContent}>Add Item</Text>
             <View style={styles.itemData}>
                 <TextInput 
-                    placeholder="Add Item..." 
+                    placeholder="e.g. Avocado"
                     style={styles.input}
                     onChangeText={onChangeText}
                 />
+            </View>
+
+            <Text style={styles.itemContent}>Add Price</Text>
+            <View style={styles.itemData}>
                 <TextInput 
-                    placeholder="Add Price..." 
+                    placeholder="e.g. 3.99"
                     style={styles.input}
-                    keyboardType={'numeric'}
                     onChangeText={onChangePrice}
                 />
+            </View>  
+
+            <Text style={styles.itemContent}>Add Category</Text>
+            <View style={styles.itemData}>
+                <TextInput 
+                    placeholder="e.g. Groceries"
+                    style={styles.input}
+                    onChangeText={onChangeCategory}
+                />
             </View>
+
             <View>
-                <TouchableOpacity style={styles.btn} onPress={() => addItem(text, price)} >
+                <TouchableOpacity style={styles.btn} onPress={() => combinedOnPress()} >
                     <Text style={styles.btnText}>
                         Add Item
                     </Text>
                 </TouchableOpacity>
             </View>
         </View>
-    );
-};
+    )
+}
 
 const styles = StyleSheet.create({
+    wrapper: {
+        flex: 1, 
+        justifyContent: 'center',
+        alignItems: 'stretch',
+    },
+
+    itemData: {
+        justifyContent: 'space-between',
+        padding: 15,
+        marginBottom: 50,
+    },
+
+    itemContent: {
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+
     input: {
         height: 40,
         padding: 1,
         margin: 1,
         fontSize: 16,
-        /*borderBottomWidth: 0.35,
-        borderBottomColor: '#0E6251'*/
+        textAlign: 'center',
     },
+
     btn: {
         backgroundColor: '#76D7C4',
         padding: 9,
@@ -66,17 +102,12 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 5,
     },
+
     btnText: {
         color: '#fff',
         fontSize: 20,
         textAlign: 'center',
     },
-    itemData: {
-        flex: 1,
-        justifyContent: 'space-between',
-        padding: 20,
-        marginBottom: 50,
-    },
-});
+})
 
 export default AddItem;

@@ -4,6 +4,7 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 // import modules
 import HomeScreen from './__routes/HomeScreen';
 import BudgetScreen from './__routes/BudgetScreen';
+import AddItem from './__components/AddItem';
 
 // import libraries
 import { NavigationContainer } from '@react-navigation/native';
@@ -17,6 +18,7 @@ const App = () => {
             <Stack.Navigator initialRouteName="Home">
                 <Stack.Screen name='Home' component={HomeScreen} />
                 <Stack.Screen name='Budget' component={BudgetScreen} />
+                <Stack.Screen name='AddItem' component={AddItem} />
             </Stack.Navigator>
         </NavigationContainer>
     );
