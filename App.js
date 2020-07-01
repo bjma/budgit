@@ -8,39 +8,57 @@ import AddItem from './__components/AddItem';
 
 // import libraries
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator, HeaderBackButton } from '@react-navigation/stack';
+
+// export reference for navigation from stack navigator
+const navigationRef = React.createRef();
+// function for navigating
+const navigate = (name, params) => {
+    navigationRef.current && navigationRef.current.navigate(name, params);
+}
 
 const Stack = createStackNavigator();
 
 const App = () => {
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
+        <NavigationContainer ref={ navigationRef }>
+            <Stack.Navigator 
+                initialRouteName="Home"
+                screenOptions={{ 
+                    title: 'budgit',
+                    headerStyle: {
+                        backgroundColor: '#7DCCBE',
+                    },
+                    headerTintColor: '#FFFFFF',
+                }}
+            >
                 <Stack.Screen 
                     name='Home' 
                     component={ HomeScreen } 
-                    options={{ 
-                        title: 'budgit',
-                        headerStyle: {
-                            backgroundColor: '#7DCCBE',
-                        },
-                        headerTitleStyle: { color: '#FFFFF' }
-                    }}
+                    options={{ headerShown: false }}
                 />
                 <Stack.Screen 
                     name='Budget' 
-                    component={ BudgetScreen } 
-                    options={{ title: 'budgit' }}
+                    component={ BudgetScreen }
+                    options={{ 
+                    }}
                 />
                 <Stack.Screen 
                     name='AddItem' 
-                    component={ AddItem } 
-                    options={{ title: 'budgit' }} 
+                    component={ AddItem }
+                    options={{
+                        headerLeft: () => (
+                            <HeaderBackButton 
+                                onPress = {() => {
+                                    navigate('Home');
+                                }}
+                            />
+                        )
+                    }}
                 />
                 <Stack.Screen 
                     name='Analytics' 
                     component={ AnalyticsScreen } 
-                    options={{ title: 'budgit' }}
                 />
             </Stack.Navigator>
         </NavigationContainer>
