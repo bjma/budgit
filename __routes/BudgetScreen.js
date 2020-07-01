@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 // import modules
 import ListItem from '../__components/ListItem';
 import AddItem from '../__components/AddItem';
+import Header from '../__components/Header';
 
 const BudgetScreen = ({ route, navigation }) => {
     // trying this jank way of navigation for now
@@ -70,6 +71,9 @@ const BudgetScreen = ({ route, navigation }) => {
 
     return (
         <View style={styles.container}>
+            <View style={{flex: 1,}}>
+                <Header customStyles={styles.svgCurve} />
+            </View>
             <View style={styles.budget}>
                 <Text style={styles.budgetSum}>${getSumPrice(items)}</Text>
             </View>
@@ -98,9 +102,8 @@ const BudgetScreen = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 2,
         justifyContent: 'space-around',
-        paddingTop: 60,
     },
 
     budget: {
@@ -145,6 +148,18 @@ const styles = StyleSheet.create({
         width: '90%',
 
     },
+
+    svgCurve: {
+        position: 'absolute',
+        width: Dimensions.get('window').width,
+    },
+
+    headerText: {
+        color: '#FFFFFF', fontSize: 24,
+        textAlign: 'center', 
+        marginBottom: 10, 
+        paddingBottom: 5,
+    }
 });
 
 export default BudgetScreen;

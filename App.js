@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { View, Image, Dimensions } from 'react-native';
 
 // import modules
 import HomeScreen from './__routes/HomeScreen';
@@ -17,6 +18,7 @@ const navigate = (name, params) => {
     navigationRef.current && navigationRef.current.navigate(name, params);
 }
 
+// stack navigator
 const Stack = createStackNavigator();
 
 const App = () => {
@@ -28,6 +30,7 @@ const App = () => {
                     title: 'budgit',
                     headerStyle: {
                         backgroundColor: '#7DCCBE',
+                        shadowColor: 'transparent',
                     },
                     headerTintColor: '#FFFFFF',
                 }}
@@ -53,7 +56,7 @@ const App = () => {
                                     navigate('Home');
                                 }}
                             />
-                        )
+                        ),
                     }}
                 />
                 <Stack.Screen 

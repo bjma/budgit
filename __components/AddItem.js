@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+
+// import components
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Dimensions } from 'react-native';
-import { onChange } from 'react-native-reanimated';
+
+// import custom modules
+import Header from './Header';
+
 
 const AddItem = ({ route, navigation }) => {
     /* Get props */
@@ -30,7 +35,10 @@ const AddItem = ({ route, navigation }) => {
 
     return (
         <View style={styles.wrapper}>
-            <Text style={{textAlign: 'center', marginBottom: 40,}}>Add an Expense</Text>
+            <View style={{flex: 1,}}>
+                <Header customStyles={styles.svgCurve} />
+            </View>
+            <Text style={styles.headerText}>Add an Expense</Text>
             <View style={styles.cardContainer}>
                 <Text style={styles.itemContent}>Merchant Name</Text>
                 <View style={styles.itemData}>
@@ -73,17 +81,17 @@ const AddItem = ({ route, navigation }) => {
 
 const styles = StyleSheet.create({
     wrapper: {
-        flex: 1, 
+        flex: 2, 
         justifyContent: 'center',
         alignItems: 'stretch',
-        paddingBottom: 50,
+        paddingBottom: Dimensions.get('window').height / 10,
     },
 
     cardContainer: {
         backgroundColor: '#FFFFFF',
         padding: 15, paddingTop: 40,
-        marginLeft: Dimensions.get('window').width * 0.1, marginTop: 5, marginBottom: 10,
-        width: '80%',
+        marginLeft: Dimensions.get('window').width * 0.15, marginTop: 5, marginBottom: 10,
+        width: '70%',
         /* card texture styles */
         borderRadius: 8, 
         shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 3, shadowOffset: { width: 0, height: 2, },
@@ -113,7 +121,7 @@ const styles = StyleSheet.create({
     btn: {
         height: 42, width: 150,
         padding: 4,
-        margin: 20, marginBottom: 10,
+        margin: 20, marginBottom: 60,
         backgroundColor: '#FFFFFF',
         borderColor: '#1FA68A', borderWidth: 1, borderRadius: 8,
     },
@@ -124,6 +132,18 @@ const styles = StyleSheet.create({
         color: '#1FA68A',
         fontSize: 16,
     },
+
+    svgCurve: {
+        position: 'absolute',
+        width: Dimensions.get('window').width,
+    },
+
+    headerText: {
+        color: '#FFFFFF', fontSize: 24,
+        textAlign: 'center', 
+        marginBottom: 10, 
+        paddingBottom: 5,
+    }
 })
 
 export default AddItem;
