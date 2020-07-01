@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, Alert, StyleSheet, Button, TouchableOpacity } from 'react-native';
 
 // import libaries
@@ -8,7 +8,15 @@ import { useNavigation } from '@react-navigation/native';
 import ListItem from '../__components/ListItem';
 import AddItem from '../__components/AddItem';
 
-const BudgetScreen = ({ navigation }) => {
+const BudgetScreen = ({ route, navigation }) => {
+    // trying this jank way of navigation for now
+    // it works
+    useEffect(() => {
+        const { addAction } = route.params;
+        if (addAction) {
+            navigation.navigate('AddItem', { addItem: addItem});
+        }
+    });
 
     // STATES:
     // items
@@ -20,7 +28,7 @@ const BudgetScreen = ({ navigation }) => {
     }]);
 
     // total budget
-    const [budget, setBudget] = useState(0);
+    //const [budget, setBudget] = useState(0);
 
     /**
      * Removes item of specified ID via filtering all items
@@ -29,7 +37,7 @@ const BudgetScreen = ({ navigation }) => {
      */
     const deleteItem = (id) => {
         setItems(prevItems => {
-            return prevItems.filter((item )=> item.id != id);
+            return prevItems.filter((item)=> item.id != id);
         })
     };
 
@@ -57,19 +65,16 @@ const BudgetScreen = ({ navigation }) => {
         for (let i = 0; i < items.length; i++) {
             sum += Number(items[i].price);
         }
-        return sum;
+        return sum.toFixed(2);
     };
 
     return (
         <View style={styles.container}>
-            <TextInput 
-                style={styles.budget}
-                defaultValue={String((budget - getSumPrice(items)).toFixed(2))}
-                onChangeText={(budget) => setBudget(budget)}
-                keyboardType={'numeric'}
-            />
-            <Text style={styles.text}>Total Budget Remaining</Text>
+            <View style={styles.budget}>
+                <Text style={styles.budgetSum}>${getSumPrice(items)}</Text>
+            </View>
             <View>
+                <Text style={styles.text}>Total Amount Spent</Text>
                 <TouchableOpacity style={styles.btn} onPress={() => navigation.navigate('AddItem', { addItem: addItem })} >
                     <Text style={styles.btnText}>
                         Add Item
@@ -85,7 +90,7 @@ const BudgetScreen = ({ navigation }) => {
                         item={item} 
                         deleteItem={deleteItem} 
                     />
-                )} 
+                )}
             />
         </View>
     );
@@ -94,24 +99,30 @@ const BudgetScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        justifyContent: 'space-around',
         paddingTop: 60,
     },
 
     budget: {
-        marginTop: 40,
-        padding: 5,
+        padding: 15,
+        justifyContent: 'center', 
+        flexDirection: 'row', 
+        alignItems: 'center',
+    },
+
+    budgetSum: {
         fontSize: 24,
-        textAlign: 'center',
     },
     
     text: {
         textAlign: 'center',
+        fontStyle: 'italic',
     },
 
     btn: {
         backgroundColor: '#76D7C4',
-        padding: 9,
-        margin: 20,
+        padding: 12,
+        margin: 35,
         marginBottom: 10,
         borderRadius: 5,
     },
@@ -123,11 +134,16 @@ const styles = StyleSheet.create({
     },
 
     listContainer: {
-
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 
     list: {
         paddingTop: 15,
+        margin: 15, marginLeft: 20,
+        width: '90%',
+
     },
 });
 

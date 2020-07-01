@@ -25,7 +25,7 @@ const AddItem = ({ route, navigation }) => {
 
     const combinedOnPress = () => {
         addItem(text, price);
-        navigation.goBack();
+        navigation.navigate('Budget', { addAction: false });
     }
 
     return (

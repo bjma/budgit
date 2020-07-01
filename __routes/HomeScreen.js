@@ -2,7 +2,14 @@ import * as React from 'react';
 import { View, Text, Button, StyleSheet, Image } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
+// import libraries
+import { NavigationActions } from '@react-navigation/native';
+
 const HomeScreen = ({ navigation }) => {
+    const goToAddScreen = () => {
+        navigation.navigate('Budget', { addAction: true });
+    };
+
     return (
         <View style={ styles.container }>
             <Image
@@ -20,13 +27,13 @@ const HomeScreen = ({ navigation }) => {
                 </Text>
             </View>
             <TouchableOpacity
-                onPress={() => navigation.navigate('Budget')}
+                onPress={ goToAddScreen }
                 style={styles.button}
             >
                 <Text style={styles.buttonText}>Add an Expense</Text>
             </TouchableOpacity>
             <TouchableOpacity
-                onPress={() => navigation.navigate('Budget')}
+                onPress={() => navigation.navigate('Budget', { addAction: false })}
                 style={styles.button}
             >
                 <Text style={styles.buttonText}>View Expenses</Text>
