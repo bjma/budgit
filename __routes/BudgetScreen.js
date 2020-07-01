@@ -1,16 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TextInput, FlatList, Alert, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native';
 
-// import libaries
-import { useNavigation } from '@react-navigation/native';
-
 // import modules
 import ListItem from '../__components/ListItem';
 import AddItem from '../__components/AddItem';
 import Header from '../__components/Header';
 
 const BudgetScreen = ({ route, navigation }) => {
-    // trying this jank way of navigation for now
+    // trying this jank way of conditional navigation for now
     // it works
     useEffect(() => {
         const { addAction } = route.params;

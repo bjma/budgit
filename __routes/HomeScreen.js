@@ -36,19 +36,19 @@ const HomeScreen = ({ navigation }) => {
                 onPress={ goToAddScreen }
                 style={styles.button}
             >
-                <Text style={styles.buttonText}>Add an Expense</Text>
+            <Text style={styles.buttonText}>Add an Expense</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Budget', { addAction: false })}
                 style={styles.button}
             >
-                <Text style={styles.buttonText}>View Expenses</Text>
+            <Text style={styles.buttonText}>View Expenses</Text>
             </TouchableOpacity>
             <TouchableOpacity
                 onPress={() => navigation.navigate('Analytics')}
                 style={styles.button}
             >
-                <Text style={styles.buttonText}>View Analytics</Text>
+            <Text style={styles.buttonText}>View Analytics</Text>
             </TouchableOpacity>
         </View>
     );
