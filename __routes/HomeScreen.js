@@ -6,9 +6,15 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { NavigationActions } from '@react-navigation/native';
 
 const HomeScreen = ({ navigation }) => {
+    /**
+     * Variant route access that chains navigation
+     * to the budget screen, then the add item screen
+     */
     const goToAddScreen = () => {
         navigation.navigate('Budget', { addAction: true });
     };
+
+    // const goToAnalytics
 
     return (
         <View style={ styles.container }>

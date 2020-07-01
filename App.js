@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { View, Text, StyleSheet, Button } from 'react-native';
 
 // import modules
 import HomeScreen from './__routes/HomeScreen';
@@ -17,23 +16,35 @@ const App = () => {
     return (
         <NavigationContainer>
             <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name='Home' component={HomeScreen} />
-                <Stack.Screen name='Budget' component={BudgetScreen} />
-                <Stack.Screen name='AddItem' component={AddItem} />
-                <Stack.Screen name='Analytics' component={AnalyticsScreen} />
+                <Stack.Screen 
+                    name='Home' 
+                    component={ HomeScreen } 
+                    options={{ 
+                        title: 'budgit',
+                        headerStyle: {
+                            backgroundColor: '#7DCCBE',
+                        },
+                        headerTitleStyle: { color: '#FFFFF' }
+                    }}
+                />
+                <Stack.Screen 
+                    name='Budget' 
+                    component={ BudgetScreen } 
+                    options={{ title: 'budgit' }}
+                />
+                <Stack.Screen 
+                    name='AddItem' 
+                    component={ AddItem } 
+                    options={{ title: 'budgit' }} 
+                />
+                <Stack.Screen 
+                    name='Analytics' 
+                    component={ AnalyticsScreen } 
+                    options={{ title: 'budgit' }}
+                />
             </Stack.Navigator>
         </NavigationContainer>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        paddingTop: 60,
-    },
-    text: {
-        textAlign: 'center',
-    }
-})
 
 export default App;

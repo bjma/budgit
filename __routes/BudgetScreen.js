@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, FlatList, Alert, StyleSheet, Button, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, FlatList, Alert, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native';
 
 // import libaries
 import { useNavigation } from '@react-navigation/native';
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
 
     list: {
         paddingTop: 15,
-        margin: 15, marginLeft: 20,
+        margin: 15, marginLeft: Dimensions.get('window').width / 20,
         width: '90%',
 
     },
