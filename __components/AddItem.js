@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Dimensions } from 'react-native';
 import { onChange } from 'react-native-reanimated';
 
 const AddItem = ({ route, navigation }) => {
@@ -30,37 +30,40 @@ const AddItem = ({ route, navigation }) => {
 
     return (
         <View style={styles.wrapper}>
-            <Text style={styles.itemContent}>Add Item</Text>
-            <View style={styles.itemData}>
-                <TextInput 
-                    placeholder="e.g. Avocado"
-                    style={styles.input}
-                    onChangeText={onChangeText}
-                />
+            <Text style={{textAlign: 'center', marginBottom: 40,}}>Add an Expense</Text>
+            <View style={styles.cardContainer}>
+                <Text style={styles.itemContent}>Merchant Name</Text>
+                <View style={styles.itemData}>
+                    <TextInput 
+                        placeholder="e.g. Safeway"
+                        style={styles.input}
+                        onChangeText={onChangeText}
+                    />
+                </View>
+
+                <Text style={styles.itemContent}>Amount Spent</Text>
+                <View style={styles.itemData}>
+                    <TextInput 
+                        placeholder="e.g. 52.99"
+                        style={styles.input}
+                        onChangeText={onChangePrice}
+                    />
+                </View>  
+
+                <Text style={styles.itemContent}>Category</Text>
+                <View style={styles.itemData}>
+                    <TextInput 
+                        placeholder="e.g. Groceries"
+                        style={styles.input}
+                        onChangeText={onChangeCategory}
+                    />
+                </View>
             </View>
 
-            <Text style={styles.itemContent}>Add Price</Text>
-            <View style={styles.itemData}>
-                <TextInput 
-                    placeholder="e.g. 3.99"
-                    style={styles.input}
-                    onChangeText={onChangePrice}
-                />
-            </View>  
-
-            <Text style={styles.itemContent}>Add Category</Text>
-            <View style={styles.itemData}>
-                <TextInput 
-                    placeholder="e.g. Groceries"
-                    style={styles.input}
-                    onChangeText={onChangeCategory}
-                />
-            </View>
-
-            <View>
+            <View style={{alignItems: 'center', justifyContent: 'center',}}>
                 <TouchableOpacity style={styles.btn} onPress={() => combinedOnPress()} >
                     <Text style={styles.btnText}>
-                        Add Item
+                        Add
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -73,6 +76,17 @@ const styles = StyleSheet.create({
         flex: 1, 
         justifyContent: 'center',
         alignItems: 'stretch',
+        paddingBottom: 50,
+    },
+
+    cardContainer: {
+        backgroundColor: '#FFFFFF',
+        padding: 15, paddingTop: 40,
+        marginLeft: Dimensions.get('window').width * 0.1, marginTop: 5, marginBottom: 10,
+        width: '80%',
+        /* card texture styles */
+        borderRadius: 8, 
+        shadowColor: '#000', shadowOpacity: 0.2, shadowRadius: 3, shadowOffset: { width: 0, height: 2, },
     },
 
     itemData: {
@@ -83,30 +97,32 @@ const styles = StyleSheet.create({
 
     itemContent: {
         textAlign: 'center',
-        fontSize: 18,
-        fontWeight: 'bold',
+        fontSize: 18, fontWeight: '500',
+        color: '#1FA68A',
     },
 
     input: {
-        height: 40,
+        height: 30,
         padding: 1,
         margin: 1,
         fontSize: 16,
         textAlign: 'center',
+        borderColor: '#F7F7F7', borderBottomWidth: 2, borderRadius: 20,
     },
 
     btn: {
-        backgroundColor: '#76D7C4',
-        padding: 9,
-        margin: 20,
-        marginBottom: 10,
-        borderRadius: 5,
+        height: 42, width: 150,
+        padding: 4,
+        margin: 20, marginBottom: 10,
+        backgroundColor: '#FFFFFF',
+        borderColor: '#1FA68A', borderWidth: 1, borderRadius: 8,
     },
 
     btnText: {
-        color: '#fff',
-        fontSize: 20,
+        paddingTop: 6,
         textAlign: 'center',
+        color: '#1FA68A',
+        fontSize: 16,
     },
 })
 
