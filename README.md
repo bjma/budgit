@@ -1,9 +1,9 @@
 # Budgit :money_with_wings:
-Budgit is a simple budgeting app built on React Native that I hacked over the summer of 2020 during shelter-in-place. Check out our [demo](https://xd.adobe.com/view/e4ef6ceb-0420-4a1c-7d9c-957d2709068e-92de/?fullscreen&hints=off)!
+Budgit is a simple budgeting app built on React Native that I hacked over the summer of 2020 during shelter-in-place. 
 
-I designed it for college students navigating the realm of financial responsibility, a struggle that I had to overcome when I started living off-campus. 
+Check out our [demo](https://xd.adobe.com/view/e4ef6ceb-0420-4a1c-7d9c-957d2709068e-92de/?fullscreen&hints=off)!
 
-No longer able to rely on the dining hall for my meals, I often found my checking account near empty, unsure if I spent that money on groceries, subscription services, or nonessentials. So, in hopes of learning how to maintain a budget, I started recording my spending habits on the Notes app, but I found the process to be slow and a bit tedious. I built this app to automate this process while learning React Native.
+Designed for college students navigating the realm of financial responsibility, a struggle that I had to overcome when I started living off-campus. It helps you maintain and track your spending habits by month.
 
 ## Installing the project
 Before running the project, make sure you have React Native installed:
